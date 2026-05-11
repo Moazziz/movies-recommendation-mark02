@@ -1,0 +1,24 @@
+[[pages]]
+path = "app.py"
+name = "Home"
+icon = "🏠"
+
+[[pages]]
+path = "pages/1_Recommendations.py"
+name = "Recommendations"
+icon = "🔍"
+
+[[pages]]
+path = "pages/2_Browse_by_Genre.py"
+name = "Browse by Genre"
+icon = "🗂️"
+
+[[pages]]
+path = "pages/3_My_Favourites.py"
+name = "My Favourites"
+icon = "❤️"
+
+[[pages]]
+path = "pages/4_Watch_History.py"
+name = "Watch History"
+icon = "🕐"
