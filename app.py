@@ -41,7 +41,7 @@ from recommender import load_data, compute_similarity, fetch_poster
 from ui_helpers  import inject_css, render_topbar, section_header, movie_row
 from nav_helper  import render_sidebar
 
-init_db()
+#init_db()
 inject_css()
 
 # ── Force sidebar to always stay open (hide the collapse arrow) ─────────────
@@ -211,7 +211,8 @@ def home_page():
 # ════════════════════════════════════════════════════════════════════════════
 #  ROUTER
 # ════════════════════════════════════════════════════════════════════════════
-if st.session_state.get("user"):
-    home_page()
-else:
-    auth_page()
+#if st.session_state.get("user"):
+#    home_page()
+#else:
+#    auth_page()
+home_page()
