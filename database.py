@@ -24,72 +24,73 @@ DB_CONFIG = {
 # ──────────────────────────────────────────────
 # CONNECTION
 # ──────────────────────────────────────────────
-def get_connection():
-    """Return a live MySQL connection, or None on failure."""
-    try:
-        conn = mysql.connector.connect(**DB_CONFIG)
-        return conn
-    except Error as e:
-        st.error(f"❌ Database connection failed: {e}")
-        return None
+#abhi comment kiya hai 23/4/26
+#def get_connection():
+   # """Return a live MySQL connection, or None on failure."""
+   # try:
+       # conn = mysql.connector.connect(**DB_CONFIG)
+      #  return conn
+  #  except Error as e:
+      #  st.error(f"❌ Database connection failed: {e}")
+       # return None
 
 
 # ──────────────────────────────────────────────
 # SCHEMA BOOTSTRAP  (run once at startup)
 # ──────────────────────────────────────────────
-def init_db():
-    """Create the database + tables if they don't exist yet."""
-    try:
-        # Connect WITHOUT specifying the database first
-        cfg = {k: v for k, v in DB_CONFIG.items() if k != "database"}
-        conn = mysql.connector.connect(**cfg)
-        cur  = conn.cursor()
+# def init_db():
+#     """Create the database + tables if they don't exist yet."""
+#     try:
+#         # Connect WITHOUT specifying the database first
+#         cfg = {k: v for k, v in DB_CONFIG.items() if k != "database"}
+#         conn = mysql.connector.connect(**cfg)
+#         cur  = conn.cursor()
 
-        cur.execute(f"CREATE DATABASE IF NOT EXISTS {DB_CONFIG['database']}")
-        cur.execute(f"USE {DB_CONFIG['database']}")
+#         cur.execute(f"CREATE DATABASE IF NOT EXISTS {DB_CONFIG['database']}")
+#         cur.execute(f"USE {DB_CONFIG['database']}")
 
-        # ── users table ──────────────────────────────────────────
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS users (
-                id            INT AUTO_INCREMENT PRIMARY KEY,
-                username      VARCHAR(80)  UNIQUE NOT NULL,
-                email         VARCHAR(150) UNIQUE NOT NULL,
-                password_hash VARCHAR(255) NOT NULL,
-                created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
-            )
-        """)
+#         # ── users table ──────────────────────────────────────────
+#         cur.execute("""
+#             CREATE TABLE IF NOT EXISTS users (
+#                 id            INT AUTO_INCREMENT PRIMARY KEY,
+#                 username      VARCHAR(80)  UNIQUE NOT NULL,
+#                 email         VARCHAR(150) UNIQUE NOT NULL,
+#                 password_hash VARCHAR(255) NOT NULL,
+#                 created_at    DATETIME DEFAULT CURRENT_TIMESTAMP
+#             )
+#         """)
 
-        # ── watch history table ──────────────────────────────────
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS watch_history (
-                id          INT AUTO_INCREMENT PRIMARY KEY,
-                user_id     INT NOT NULL,
-                movie_title VARCHAR(255) NOT NULL,
-                watched_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-            )
-        """)
+#         # ── watch history table ──────────────────────────────────
+#         cur.execute("""
+#             CREATE TABLE IF NOT EXISTS watch_history (
+#                 id          INT AUTO_INCREMENT PRIMARY KEY,
+#                 user_id     INT NOT NULL,
+#                 movie_title VARCHAR(255) NOT NULL,
+#                 watched_at  DATETIME DEFAULT CURRENT_TIMESTAMP,
+#                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+#             )
+#         """)
 
-        # ── user favourites table ────────────────────────────────
-        cur.execute("""
-            CREATE TABLE IF NOT EXISTS user_favourites (
-                id          INT AUTO_INCREMENT PRIMARY KEY,
-                user_id     INT NOT NULL,
-                movie_title VARCHAR(255) NOT NULL,
-                added_at    DATETIME DEFAULT CURRENT_TIMESTAMP,
-                UNIQUE KEY uq_fav (user_id, movie_title),
-                FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
-            )
-        """)
+#         # ── user favourites table ────────────────────────────────
+#         cur.execute("""
+#             CREATE TABLE IF NOT EXISTS user_favourites (
+#                 id          INT AUTO_INCREMENT PRIMARY KEY,
+#                 user_id     INT NOT NULL,
+#                 movie_title VARCHAR(255) NOT NULL,
+#                 added_at    DATETIME DEFAULT CURRENT_TIMESTAMP,
+#                 UNIQUE KEY uq_fav (user_id, movie_title),
+#                 FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE
+#             )
+#         """)
 
-        conn.commit()
-        cur.close()
-        conn.close()
-        return True
+#         conn.commit()
+#         cur.close()
+#         conn.close()
+#         return True
 
-    except Error as e:
-        st.error(f"❌ DB init error: {e}")
-        return False
+#     except Error as e:
+#         st.error(f"❌ DB init error: {e}")
+#         return False
 
 
 # ──────────────────────────────────────────────
