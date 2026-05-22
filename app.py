@@ -27,21 +27,21 @@ st.set_page_config(
 )
 
 #from database    import init_db, login_user, register_user, get_favourites
-# from database import init_db, login_user, register_user, get_favourites
+from database import init_db, login_user, register_user, get_favourites
 
-def login_user(username, password):
-    return None
+#def login_user(username, password):
+#    return None
 
-def register_user(username, email, password):
-    return False, "Database disabled on cloud."
+#def register_user(username, email, password):
+#    return False, "Database disabled on cloud."
 
-def get_favourites(user_id):
-    return []
+#def get_favourites(user_id):
+#    return []
 from recommender import load_data, compute_similarity, fetch_poster
 from ui_helpers  import inject_css, render_topbar, section_header, movie_row
 from nav_helper  import render_sidebar
 
-#init_db()
+init_db()
 inject_css()
 
 # ── Force sidebar to always stay open (hide the collapse arrow) ─────────────
