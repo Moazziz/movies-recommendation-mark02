@@ -61,7 +61,7 @@ st.markdown(
 )
 
 MOVIES_CSV  = r"G:\My Drive\movies data set\tmdb_5000_movies.csv"
-CREDITS_CSV = r"G:\My Drive\credit data set\tmdb_5000_credits.csv"
+CREDITS_CSV = r"G:\My Drive\credit data set\tmdb_5000_credits.zip"
 
 movies     = load_data(MOVIES_CSV, CREDITS_CSV)
 cosine_sim = compute_similarity(movies["tags"])
